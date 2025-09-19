@@ -16,7 +16,12 @@ class BoardArray : public Board {
         void add(Entry* entry) {
             // TODO: IMPLEMENT THIS FUNCTION
             // ALGORITHM IS PROVIDED IN INSTRUCTIONS.TXT
-            return;
+            if(index == 0){
+                array[0] = *entry;
+                index++;
+                return;
+            }
+            
         }
 
         void print() {
