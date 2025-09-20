@@ -13,33 +13,36 @@ class BoardArray : public Board {
             index = 0;
         }
 
-        void add(Entry* entry) {
-            // TODO: IMPLEMENT THIS FUNCTION
-            // ALGORITHM IS PROVIDED IN INSTRUCTIONS.TXT
-            int pos = -1;
-            for(int i = 0; i < index; i++) {
-                if(entry->compare(&array[i])) {
-                    pos = i;
-                    break;
-                }
+       void add(Entry* entry) {
+        int pos = -1;
+        for (int i = 0; i < index; i++) {
+            if (entry->compare(&array[i])) {
+                pos = i;
+                break;
             }
-            if(pos == -1){
-                if(index < SIZE){
-                    array[index] = *entry;
-                    index++;
-                }else{
-                    cout << "Scoreboard is full. Entry cannot be added." << endl;
-                }
-                return;
+        }
+        if (pos == -1) {
+            if (index < SIZE) {
+                array[index] = *entry;
+                index++;
+            }else{
+            cout << entry->name << "'s score is too low to be added!" << endl;
             }
-            if(index == SIZE) --index;
-            for(int i = index; i > pos; i--){
-                array[i] = array[i-1];
+            return;
+        }
+        if (index == SIZE) {
+            for (int i = SIZE - 1; i > pos; i--) {
+                array[i] = array[i - 1];
             }
             array[pos] = *entry;
-            index++;
-            
+        }else{
+            for (int i = index; i > pos; i--) {
+            array[i] = array[i - 1];
         }
+        array[pos] = *entry;
+        index++;
+        }
+    }
 
         void print() {
             for (int i = 0; i < index; i++) {
