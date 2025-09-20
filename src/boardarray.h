@@ -16,11 +16,28 @@ class BoardArray : public Board {
         void add(Entry* entry) {
             // TODO: IMPLEMENT THIS FUNCTION
             // ALGORITHM IS PROVIDED IN INSTRUCTIONS.TXT
-            if(index == 0){
-                array[0] = *entry;
-                index++;
+            int pos = -1;
+            for(int i = 0; i < index; i++) {
+                if(entry->compare(&array[i])) {
+                    pos = i;
+                    break;
+                }
+            }
+            if(pos == -1){
+                if(index < SIZE){
+                    array[index] = *entry;
+                    index++;
+                }else{
+                    cout << "Scoreboard is full. Entry cannot be added." << endl;
+                }
                 return;
             }
+            if(index == SIZE) --index;
+            for(int i = index; i > pos; i--){
+                array[i] = array[i-1];
+            }
+            array[pos] = *entry;
+            index++;
             
         }
 
